@@ -7,6 +7,7 @@ import Nous from "@/sections/Nous";
 import Music from "@/sections/Music";
 import Gallery from "@/sections/Gallery";
 import Contact from "@/sections/Contact";
+//import CollapsibleSection from "@/components/CollapsibleSection"; for future use
 
 export default function Home() {
   return (
