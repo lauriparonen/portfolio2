@@ -46,15 +46,28 @@ export default function Visualizer3D({ src }: Props) {
   // Inner reactive point cloud
   function Cloud() {
     const pointsRef = useRef<THREE.Points>(null);
+    const materialRef = useRef<THREE.PointsMaterial>(null);
 
     useFrame(() => {
       const pts = pointsRef.current;
-      if (!pts) return;
+      const mat = materialRef.current;
+
+      if (!pts || !analyser || !mat) return;
+
+      // Rotate the points
       pts.rotation.y += 0.00000000001;
+
       if (analyser) {
         const data = new Uint8Array(analyser.frequencyBinCount);
         analyser.getByteFrequencyData(data);
         const avg = data.reduce((sum, v) => sum + v, 0) / data.length;
+        const norm = avg / 255;
+
+        const hue = THREE.MathUtils.lerp(0.6, 0.0, norm);
+        mat.color.setHSL(hue, 1, 0.5); // Set color based on average frequency
+
+        mat.size = THREE.MathUtils.lerp(0.002, 0.08, norm); // Set size based on average frequency
+
         const scale = THREE.MathUtils.lerp(1, 2, avg / 255);
         pts.scale.set(scale, scale, scale);
       }
@@ -64,6 +77,7 @@ export default function Visualizer3D({ src }: Props) {
       <points ref={pointsRef}>
         <sphereGeometry args={[1, 32, 32]} />
         <pointsMaterial
+          ref={materialRef}
           size={0.009}
           color="#ffffff"
           sizeAttenuation
