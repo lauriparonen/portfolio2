@@ -1,5 +1,5 @@
 import { MeshGradient } from '@paper-design/shaders-react';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -7,28 +7,50 @@ type Props = {
 };
 
 const ShadedBackground = ({ children, className = '' }: Props) => {
-    const containerRef = useRef<HTMLDivElement | null>(null);
-    const [opacity, setOpacity] = useState(0);
-  
-    useEffect(() => {
-      if (!containerRef.current) return;
-  
-      const observer = new IntersectionObserver(
-        ([entry]) => setOpacity(entry.intersectionRatio),
-        {
-          threshold: Array.from({ length: 20 }, (_, i) => i / 20),
-          rootMargin: '-10% 0px -10% 0px',
-        },
-      );
-  
-      observer.observe(containerRef.current);
-      return () => observer.disconnect();
-    }, []);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [opacity, setOpacity] = useState(0);
+  const rafRef = useRef<number | undefined>(undefined);
+  const lastFrameTime = useRef(0);
+  const FRAME_INTERVAL = 1000 / 30; // Cap at 30fps
+  const currentRatio = useRef(0);
+
+  const updateOpacity = useCallback(() => {
+    const now = performance.now();
+    if (now - lastFrameTime.current >= FRAME_INTERVAL) {
+      setOpacity(currentRatio.current);
+      lastFrameTime.current = now;
+    }
+    rafRef.current = requestAnimationFrame(updateOpacity);
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        currentRatio.current = entry.intersectionRatio;
+      },
+      {
+        threshold: [0, 0.25, 0.5, 0.75, 1], // Reduced number of thresholds
+        rootMargin: '-10% 0px -10% 0px',
+      },
+    );
+
+    observer.observe(containerRef.current);
+    rafRef.current = requestAnimationFrame(updateOpacity);
+
+    return () => {
+      observer.disconnect();
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, [updateOpacity]);
 
   return (
     <div ref={containerRef} className={`relative ${className}`}>
       <div 
-        className="absolute inset-0 transition-opacity duration-500 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{ 
           opacity: opacity * 0.4,
           maskImage: 'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)',

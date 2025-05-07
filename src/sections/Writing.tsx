@@ -3,9 +3,9 @@ import CollapsibleSection from "@/components/CollapsibleSection";
 const Writing = () => (
   <CollapsibleSection title="writing">
     <p className="text-gray-400 max-w-xl mb-8">
-      for some years now, I have had an intermittent, overarching desire to verbalize
+      For some years now, I have had an intermittent, overarching desire to verbalize
       ideas—specifically ones pertaining to mystical philosophy and <i>ways of liberation</i>. 
-      you can find my longer-form writing <a href="https://foodofthegods.substack.com/" className="text-blue-200 hover:underline">here</a>, on my Substack.
+      You can find my longer-form writing <a href="https://foodofthegods.substack.com/" className="text-blue-200 hover:underline">here</a>, on my Substack.
     </p>
     
     <div className="flex justify-center px-4">

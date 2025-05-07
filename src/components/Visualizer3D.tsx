@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -9,11 +9,24 @@ type Props = { src: string };
 
 type VisualizationMode = "sphere" | "particles";
 
+// Shared AudioContext instance
+let sharedAudioContext: AudioContext | null = null;
+
 export default function Visualizer3D({ src }: Props) {
   console.log("[Visualizer3D] mount src=", src);
   const audioEl = useRef<HTMLAudioElement>(null);
   const [analyser, setAnalyser] = useState<AnalyserNode | null>(null);
   const [mode, setMode] = useState<VisualizationMode>("sphere");
+  const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [dpr, setDpr] = useState(1);
+  const frameCount = useRef(0);
+  const FRAME_THROTTLE = 2; // Only update every 2nd frame
+
+  useEffect(() => {
+    setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+    setDpr(window.devicePixelRatio);
+  }, []);
 
   // Initialize Web Audio
   useEffect(() => {
@@ -22,27 +35,49 @@ export default function Visualizer3D({ src }: Props) {
       console.warn("[Visualizer3D] audioEl missing");
       return;
     }
-    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-    const analyserNode = ctx.createAnalyser();
-    analyserNode.fftSize = 256;
+
+    // Reuse existing AudioContext or create new one
+    if (!sharedAudioContext || sharedAudioContext.state === "closed") {
+      sharedAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    }
+
+    const analyserNode = sharedAudioContext.createAnalyser();
+    analyserNode.fftSize = isMobile ? 128 : 256; // Reduce FFT size on mobile
     setAnalyser(analyserNode);
 
-    const srcNode = ctx.createMediaElementSource(audio);
+    const srcNode = sharedAudioContext.createMediaElementSource(audio);
     srcNode.connect(analyserNode);
-    analyserNode.connect(ctx.destination);
+    analyserNode.connect(sharedAudioContext.destination);
 
     const onPlay = () => {
-      if (ctx.state === "suspended") ctx.resume();
+      if (sharedAudioContext?.state === "suspended") {
+        sharedAudioContext.resume();
+      }
     };
     audio.addEventListener("play", onPlay);
+
+    // Set up intersection observer for visibility
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+        if (!entry.isIntersecting && sharedAudioContext?.state === "running") {
+          sharedAudioContext.suspend();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (audio.parentElement) {
+      observer.observe(audio.parentElement);
+    }
 
     return () => {
       audio.removeEventListener("play", onPlay);
       srcNode.disconnect();
       analyserNode.disconnect();
-      ctx.close();
+      observer.disconnect();
     };
-  }, []);
+  }, [isMobile]);
 
   // Sphere visualization
   function SphereCloud() {
@@ -50,6 +85,11 @@ export default function Visualizer3D({ src }: Props) {
     const materialRef = useRef<THREE.PointsMaterial>(null);
 
     useFrame(() => {
+      if (!isVisible) return;
+      
+      frameCount.current++;
+      if (frameCount.current % (isMobile ? 4 : FRAME_THROTTLE) !== 0) return; // More aggressive throttling on mobile
+
       const pts = pointsRef.current;
       const mat = materialRef.current;
 
@@ -75,7 +115,7 @@ export default function Visualizer3D({ src }: Props) {
 
     return (
       <points ref={pointsRef}>
-        <sphereGeometry args={[1, 32, 32]} />
+        <sphereGeometry args={[1, isMobile ? 16 : 32, isMobile ? 16 : 32]} /> {/* Reduce geometry complexity on mobile */}
         <pointsMaterial
           ref={materialRef}
           size={0.009}
@@ -94,7 +134,7 @@ export default function Visualizer3D({ src }: Props) {
     const particlesRef = useRef<THREE.Points>(null);
     const materialRef = useRef<THREE.PointsMaterial>(null);
     const [particles] = useState(() => {
-      const count = 2000;
+      const count = isMobile ? 1000 : 2000; // Reduce particle count on mobile
       const positions = new Float32Array(count * 3);
       const velocities = new Float32Array(count * 3);
       
@@ -118,6 +158,11 @@ export default function Visualizer3D({ src }: Props) {
     });
 
     useFrame(() => {
+      if (!isVisible) return;
+      
+      frameCount.current++;
+      if (frameCount.current % (isMobile ? 4 : FRAME_THROTTLE) !== 0) return; // More aggressive throttling on mobile
+
       const pts = particlesRef.current;
       const mat = materialRef.current;
 
@@ -169,7 +214,7 @@ export default function Visualizer3D({ src }: Props) {
         pts.geometry.attributes.position.needsUpdate = true;
 
         // Update color and size based on audio
-        const hue = (Date.now() * 0.0001 + norm * 0.05) % 1; // Continuously changing base hue
+        const hue = (Date.now() * 0.0001 + norm * 0.05) % 1;
         const saturation = THREE.MathUtils.lerp(0.7, 1, Math.sin(Date.now() * 0.001) * 0.5 + 0.5);
         const lightness = THREE.MathUtils.lerp(0.3, 0.9, norm);
         mat.color.setHSL(hue, saturation, lightness);
@@ -204,12 +249,21 @@ export default function Visualizer3D({ src }: Props) {
   return (
     <div className="w-full max-w-2xl mx-auto">
       <div className="h-[420px] rounded bg-black">
-        <Canvas camera={{ position: [0, 0, 2] }} className="h-full">
+        <Canvas 
+          camera={{ position: [0, 0, 2] }} 
+          className="h-full"
+          dpr={isMobile ? 1 : dpr} // Use state instead of direct window access
+        >
           <color attach="background" args={["#000"]} />
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={0.7} />
-          {mode === "sphere" ? <SphereCloud /> : <ParticleSystem />}
-          <OrbitControls autoRotate autoRotateSpeed={0.1} enableZoom={true} enablePan={false} />
+          {isVisible && (mode === "sphere" ? <SphereCloud /> : <ParticleSystem />)}
+          <OrbitControls 
+            autoRotate 
+            autoRotateSpeed={0.1} 
+            enableZoom={!isMobile} 
+            enablePan={false} 
+          />
         </Canvas>
       </div>
       <div className="flex justify-center mt-4">

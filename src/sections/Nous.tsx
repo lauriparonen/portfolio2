@@ -1,7 +1,7 @@
 import CollapsibleSection from "@/components/CollapsibleSection";
 
 const Nous = () => (
-  <CollapsibleSection title="nous" defaultOpen={true}>
+  <CollapsibleSection title="nous" defaultOpen={false}>
     <p className="text-gray-400">below is an embed of my Cosmos page, a peer into my aesthetic and noetic sensibilities</p>
 
     <div className="mt-10 flex justify-center">

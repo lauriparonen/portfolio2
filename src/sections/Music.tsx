@@ -11,26 +11,21 @@ export default function Music() {
   };
 
   return (
-    <CollapsibleSection title="music" defaultOpen={true}>
+    <CollapsibleSection title="music" defaultOpen={false}>
       <p className="text-gray-400 max-w-xl mb-8">
         I sometimes tinker with sound. Below is a 3D particle visualizer that
         dances to one of my tracks, and under it previews to my music on SoundCloud and Spotify. 
-        
-        {/* 
-        You can also explore my music on{" "}
-        <Link href="https://soundcloud.com/lamiatunes" className="underline hover:text-white">
-          SoundCloud
-        </Link>{" "}
-        and{" "}
-        <Link href="https://open.spotify.com/artist/6b1HmB9aQHT0nEXpB02pEm" className="underline hover:text-white">
-          Spotify
-        </Link>.
-        */}
       </p>
-      
 
-      <Visualizer3D src="/audio/grassblades.mp3" />
-    
+      <div className="flex justify-center mb-8">
+        <Link 
+          href="/visualizer" 
+          className="bg-black text-white border border-gray-900 rounded px-6 py-3 hover:border-gray-500 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+        >
+          Open Full-Screen Visualizer
+        </Link>
+      </div>
+      
       <div className="space-y-6 max-w-4xl mx-auto px-4 py-12">
         <div className="text-left text-gray-200">
           <button
@@ -79,7 +74,7 @@ export default function Music() {
             </div>
           </div>
         </div>
-
+        
         <div className="text-left text-gray-200">
           <button
             onClick={() => toggleSection('favorite')}
