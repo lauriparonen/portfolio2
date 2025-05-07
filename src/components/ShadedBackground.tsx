@@ -1,44 +1,34 @@
 import { MeshGradient } from '@paper-design/shaders-react';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 type Props = {
   children: React.ReactNode;
   className?: string;
 };
 
-const ShadedBackground = ({ children, className = "" }: Props) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [opacity, setOpacity] = useState(0);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-        // Smoothly transition opacity based on intersection ratio
-        setOpacity(entry.intersectionRatio);
-      },
-      {
-        threshold: Array.from({ length: 20 }, (_, i) => i / 20), // Create array of thresholds from 0 to 1
-        rootMargin: "-10% 0px -10% 0px" // Start fading in/out slightly before the element is fully in view
-      }
-    );
-
-    const element = document.getElementById('shader-container');
-    if (element) {
-      observer.observe(element);
-    }
-
-    return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
-    };
-  }, []);
+const ShadedBackground = ({ children, className = '' }: Props) => {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const [opacity, setOpacity] = useState(0);
+  
+    useEffect(() => {
+      if (!containerRef.current) return;
+  
+      const observer = new IntersectionObserver(
+        ([entry]) => setOpacity(entry.intersectionRatio),
+        {
+          threshold: Array.from({ length: 20 }, (_, i) => i / 20),
+          rootMargin: '-10% 0px -10% 0px',
+        },
+      );
+  
+      observer.observe(containerRef.current);
+      return () => observer.disconnect();
+    }, []);
 
   return (
-    <div id="shader-container" className={`relative ${className}`}>
+    <div ref={containerRef} className={`relative ${className}`}>
       <div 
-        className="absolute inset-0 transition-opacity duration-500"
+        className="absolute inset-0 transition-opacity duration-500 pointer-events-none"
         style={{ 
           opacity: opacity * 0.4,
           maskImage: 'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)',

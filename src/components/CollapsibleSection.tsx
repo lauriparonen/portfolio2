@@ -16,7 +16,7 @@ const CollapsibleSection = ({ title, children, defaultOpen = false }: Props) => 
         <div className="px-6 py-20">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center justify-between w-full text-left mb-4"
+            className="relative z-20 flex w-full items-center justify-between py-4"
           >
             <h2 className="text-3xl font-serif">{title}</h2>
             <span className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
