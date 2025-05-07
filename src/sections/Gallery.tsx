@@ -1,3 +1,4 @@
+import CollapsibleSection from "@/components/CollapsibleSection";
 import ImageCarousel from "@/components/ImageCarousel";
 
 // Array for image filenames
@@ -17,7 +18,7 @@ const imageData = [
     "DALL·E 2023-04-30 14.33.49 - A mysterious, blue pattern of light on a dark background, waves of light diffracted in water.png",
     "DALL·E 2023-04-30 14.33.59 - A nebula in the shape of a rose, beautiful detailed renassaince oil painting.png",
     "DALL·E 2023-04-30 14.34.21 - Spiral nebula, magnificent oil painting by Odilon Redon.png",
-    "DALL·E 2023-04-30 14.34.40 - A highly detailed DSLR image of Hokusai’s “The Great Wave off Kanagawa“.png",
+    "DALL·E 2023-04-30 14.34.40 - A highly detailed DSLR image of Hokusai's \"The Great Wave off Kanagawa\".png",
     "DALL·E 2023-04-30 14.34.51 - Clouds in a Monet oil painting, with subtle psychedelic details.png",
     "DALL·E 2023-04-30 14.35.04 - Extremely detailed oil painting of a cat by Von Wright, high definition.png",
     "DALL·E 2023-04-30 14.35.19 - Extremely detailed oil painting of an owl by Von Wright, high definition.png",
@@ -83,36 +84,33 @@ const imageData = [
     "DALL·E 2023-05-09 22.47.06 - glitter in the sky, rainbow star, abstract watercolor painting by Odilon Redon, pastel colorscape.png",
     "DALL·E 2023-05-09 22.47.20 - glitter in the sky, rainbow star, abstract watercolor painting by Odilon Redon, pastel colorscape.png",
     "DALL·E 2023-05-09 22.47.25 - glitter in the sky, rainbow star, abstract watercolor painting by Odilon Redon, pastel colorscape.png"
-]
+];
 
 const Gallery = () => (
-    <div className="min-h-screen px-6 py-20">
-      <h2 className="text-3xl font-serif mb-4">Gallery</h2>
-        <div className="flex flex-col md:flex-row gap-12">
-            <div className="md:w-1/2 max-w-xl text-gray-400 text-sm leading-relaxed">
-            <p className="text-gray-400 max-w-xl mb-8">
-                    In 2022, OpenAI published DALL-E 2, a now-deprecated image generation model that could create images from text prompts. 
-                    This was a very brief period of time when AI image generation wasn't <i>slop</i> yet—each image seemed pregnant with 
-                    a promise of infinite possibility and creative freedom, and this potentiality fragranced each generation with a sense of aesthetic richness
-                    which compensated for the abundant visual inconsistencies and imperfections.
-                    <br /><br />
-                    Brian Eno noted that <a href="https://www.goodreads.com/quotes/649039-whatever-you-now-find-weird-ugly-uncomfortable-and-nasty-about"
-                    
-                    className="text-gray-400 hover:underline">
-                    "whatever you now find weird, ugly, uncomfortable and nasty about a new medium will surely become its signature."</a> There
-                    is certainly no shortage of things to find ugly and nasty about AI image generation as a medium, and I am by no means a 
-                    proponent of "AI art"; however I chose to include these generations of mine on this site as a little token of <i>nostalgia</i>,
-                    to celebrate the transience of this specific model. I shall always have a soft spot in my memory for it.
-
-                </p>
+  <CollapsibleSection title="gallery" defaultOpen={true}>
+    <div className="flex flex-col md:flex-row gap-12">
+      <div className="md:w-1/2 max-w-xl text-gray-400 text-sm leading-relaxed">
+        <p className="text-gray-400 max-w-xl mb-8">
+          In 2022, OpenAI published DALL-E 2, a now-deprecated image generation model that could create images from text prompts. 
+          This was a very brief period of time when AI image generation wasn't <i>slop</i> yet—each image seemed pregnant with 
+          a promise of infinite possibility and creative freedom, and this potentiality fragranced each generation with a sense of aesthetic richness
+          which compensated for the abundant visual inconsistencies and imperfections.
+          <br /><br />
+          Brian Eno noted that <a href="https://www.goodreads.com/quotes/649039-whatever-you-now-find-weird-ugly-uncomfortable-and-nasty-about"
+          className="text-gray-400 hover:underline">
+          "whatever you now find weird, ugly, uncomfortable and nasty about a new medium will surely become its signature."</a> There
+          is certainly no shortage of things to find ugly and nasty about AI image generation as a medium, and I am by no means a 
+          proponent of "AI art"; however I chose to include these generations of mine on this site as a little token of <i>nostalgia</i>,
+          to celebrate the transience of this specific model. I shall always have a soft spot in my memory for it.
+        </p>
       </div>
 
       <div className="md:w-1/2">
         <ImageCarousel images={imageData} />
       </div>
     </div>
+  </CollapsibleSection>
+);
 
-    </div>
-  );
-  export default Gallery;
+export default Gallery;
   

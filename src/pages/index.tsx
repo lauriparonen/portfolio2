@@ -7,6 +7,7 @@ import Nous from "@/sections/Nous";
 import Music from "@/sections/Music";
 import Gallery from "@/sections/Gallery";
 import Contact from "@/sections/Contact";
+import About from "@/sections/About";
 //import CollapsibleSection from "@/components/CollapsibleSection"; for future use
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       </Head>
       <Header />
       <main className="pt-20 bg-black text-gray-200 scroll-smooth">
+        <section id="about"><About /></section>
         <section id="code"><Code /></section>
         <section id="writing"><Writing /></section>
         <section id="nous"><Nous /></section>
