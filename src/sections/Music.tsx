@@ -13,16 +13,17 @@ export default function Music() {
   return (
     <CollapsibleSection title="music" defaultOpen={false}>
       <p className="text-gray-400 max-w-xl mb-8">
-        I sometimes tinker with sound. Below is a 3D particle visualizer that
-        dances to one of my tracks, and under it previews to my music on SoundCloud and Spotify. 
+        I sometimes tinker with sound. Below you can find my music on SoundCloud and Spotify,
+        as well as a collection of 3D particle visualizers that dance to my music.
       </p>
 
       <div className="flex justify-center mb-8">
         <Link 
           href="/visualizer" 
+          target="_blank"
           className="bg-black text-white border border-gray-900 rounded px-6 py-3 hover:border-gray-500 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500/20"
         >
-          Open Full-Screen Visualizer
+          visualizers
         </Link>
       </div>
       
