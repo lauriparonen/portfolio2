@@ -5,8 +5,6 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
-// 3D Audio Nebula Visualizer (Debugged)
-
 type Props = { src: string };
 
 type VisualizationMode = "sphere" | "particles";
@@ -171,9 +169,9 @@ export default function Visualizer3D({ src }: Props) {
         pts.geometry.attributes.position.needsUpdate = true;
 
         // Update color and size based on audio
-        const hue = (Date.now() * 0.0001 + norm * 0.5) % 1; // Continuously changing base hue
+        const hue = (Date.now() * 0.0001 + norm * 0.05) % 1; // Continuously changing base hue
         const saturation = THREE.MathUtils.lerp(0.7, 1, Math.sin(Date.now() * 0.001) * 0.5 + 0.5);
-        const lightness = THREE.MathUtils.lerp(0.3, 0.7, norm);
+        const lightness = THREE.MathUtils.lerp(0.3, 0.9, norm);
         mat.color.setHSL(hue, saturation, lightness);
         mat.size = THREE.MathUtils.lerp(0.002, 0.08, norm);
       }
@@ -218,7 +216,7 @@ export default function Visualizer3D({ src }: Props) {
         <select
           value={mode}
           onChange={(e) => setMode(e.target.value as VisualizationMode)}
-          className="bg-black text-white border border-gray-700 rounded px-4 py-2 focus:outline-none focus:border-blue-500"
+          className="bg-black text-white border border-gray-900 rounded px-4 py-2 focus:outline-none focus:border-gray-500 transition-all duration-300 ease-in-out hover:border-gray-500 focus:ring-2 focus:ring-blue-500/20"
         >
           <option value="sphere">sphere</option>
           <option value="particles">particle system</option>
