@@ -1,7 +1,9 @@
 import {
-    useRef, useEffect, useState, ReactNode,
+    useRef, useEffect, useState, ReactNode, Suspense, lazy,
   } from 'react';
-  import { MeshGradient } from '@paper-design/shaders-react';
+  
+  // Lazy load the MeshGradient component
+  const MeshGradient = lazy(() => import('@paper-design/shaders-react').then(mod => ({ default: mod.MeshGradient })));
   
   type Props = {
     children: ReactNode;
@@ -30,6 +32,31 @@ import {
     }
   };
   
+  // capping the frame rate to 30 for performance
+  const FRAME_RATE = 30;
+  const FRAME_TIME = 1000 / FRAME_RATE;
+  
+  // Quality levels for different viewport positions
+  const QUALITY_LEVELS = {
+    ACTIVE: { resolution: 1, speed: 0.08 },
+    NEARBY: { resolution: 0.75, speed: 0.06 },
+    DISTANT: { resolution: 0.5, speed: 0.04 },
+    DORMANT: { resolution: 0.25, speed: 0.02 }
+  };
+
+  // Simple gradient fallback while shader loads
+  const GradientFallback = ({ colors }: { colors: typeof paletteMap.blue }) => (
+    <div 
+      style={{
+        width: '100%',
+        height: '100%',
+        background: `linear-gradient(45deg, ${colors.color1}, ${colors.color2}, ${colors.color3}, ${colors.color4})`,
+        backgroundSize: '400% 400%',
+        animation: 'gradient 15s ease infinite',
+      }}
+    />
+  );
+  
   const ShadedBackground = ({
     children,
     className = '',
@@ -37,6 +64,10 @@ import {
   }: Props) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isMobile, setIsMobile] = useState(false);
+    const [lastFrameTime, setLastFrameTime] = useState(0);
+    const [isVisible, setIsVisible] = useState(true);
+    const [qualityLevel, setQualityLevel] = useState(QUALITY_LEVELS.ACTIVE);
+    const [shouldLoadShader, setShouldLoadShader] = useState(false);
     const colors = paletteMap[palette];
 
     useEffect(() => {
@@ -52,6 +83,58 @@ import {
       return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+    useEffect(() => {
+      if (!containerRef.current) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          setIsVisible(entry.isIntersecting);
+          
+          // Start loading shader when section is about to become visible
+          if (entry.isIntersecting || entry.intersectionRatio > 0) {
+            setShouldLoadShader(true);
+          }
+          
+          // Calculate quality level based on intersection ratio and position
+          if (!entry.isIntersecting) {
+            setQualityLevel(QUALITY_LEVELS.DORMANT);
+            return;
+          }
+
+          const rect = entry.boundingClientRect;
+          const viewportHeight = window.innerHeight;
+          const distanceFromCenter = Math.abs(rect.top + rect.height/2 - viewportHeight/2);
+          const maxDistance = viewportHeight * 1.5; // 1.5 viewport heights
+          const distanceRatio = distanceFromCenter / maxDistance;
+
+          if (entry.intersectionRatio > 0.8) {
+            setQualityLevel(QUALITY_LEVELS.ACTIVE);
+          } else if (distanceRatio < 0.5) {
+            setQualityLevel(QUALITY_LEVELS.NEARBY);
+          } else {
+            setQualityLevel(QUALITY_LEVELS.DISTANT);
+          }
+        },
+        {
+          threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+          rootMargin: '50% 0px' // Extend the observation area
+        }
+      );
+
+      observer.observe(containerRef.current);
+      return () => observer.disconnect();
+    }, []);
+
+    const handleFrame = (timestamp: number) => {
+      if (!isVisible) return false;
+      if (timestamp - lastFrameTime >= FRAME_TIME) {
+        setLastFrameTime(timestamp);
+        return true;
+      }
+      return false;
+    };
+
     return (
       <div ref={containerRef} className={`relative overflow-hidden ${className}`}>
         {/* Section-local gradient, laid behind content */}
@@ -65,26 +148,21 @@ import {
               'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)',
           }}
         >
-          {!isMobile && (
-            <MeshGradient
-              {...colors}
-              speed={0.08}
-              style={{
-                width: '100%',
-                height: '100%',
-              }}
-            />
-          )}
-          {isMobile && (
-            <div 
-              style={{
-                width: '100%',
-                height: '100%',
-                background: `linear-gradient(45deg, ${colors.color1}, ${colors.color2}, ${colors.color3}, ${colors.color4})`,
-                backgroundSize: '400% 400%',
-                animation: 'gradient 15s ease infinite',
-              }}
-            />
+          {!isMobile && shouldLoadShader ? (
+            <Suspense fallback={<GradientFallback colors={colors} />}>
+              <MeshGradient
+                {...colors}
+                speed={qualityLevel.speed}
+                resolution={qualityLevel.resolution}
+                onFrame={handleFrame}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </Suspense>
+          ) : (
+            <GradientFallback colors={colors} />
           )}
         </div>
 
