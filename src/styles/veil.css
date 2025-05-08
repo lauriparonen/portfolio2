@@ -1,0 +1,34 @@
+@layer base {
+    /* every .hole is positioned absolutely inside #veil */
+    #veil .hole {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      /* punch the hole */
+      background: white;
+      mix-blend-mode: destination-out;      /* makes this area transparent */
+      pointer-events: none;
+    }
+    /* soft fade: transparent middle, black edges */
+    #veil .hole::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: black;
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 25%,
+        black 75%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 25%,
+        black 75%,
+        transparent 100%
+      );
+    }
+  }
+  

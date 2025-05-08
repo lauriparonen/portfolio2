@@ -1,61 +1,60 @@
-// src/pages/index.tsx
-import Head from "next/head";
-import Header from "@/components/Header";
-import Code from "@/sections/Code";
-import Writing from "@/sections/Writing";
-import Nous from "@/sections/Nous";
-import Music from "@/sections/Music";
-import Gallery from "@/sections/Gallery";
-import Contact from "@/sections/Contact";
-import About from "@/sections/About";
-import CollapsibleSection from "@/components/CollapsibleSection";
+// pages/index.tsx
+import { useState } from 'react';
+import Head from 'next/head';
+import Header from '@/components/Header';
+import ShadedBackground, { Palette } from '@/components/ShadedBackground';
+import CollapsibleSection from '@/components/CollapsibleSection';
 
+import Code     from '@/sections/Code';
+import Writing  from '@/sections/Writing';
+import Nous     from '@/sections/Nous';
+import Music    from '@/sections/Music';
+import Gallery  from '@/sections/Gallery';
+import Contact  from '@/sections/Contact';
+import About    from '@/sections/About';
 
 export default function Home() {
+  const [activePalette, setActivePalette] = useState<Palette>('blue');
+
   return (
     <>
       <Head>
         <title>lauri paronen</title>
         <meta name="description" content="Developer, writer, and sound tinkerer" />
       </Head>
+
+      {/* global background */}
+      <ShadedBackground palette={activePalette} />
+
       <Header />
 
-        <main className="pt-20 bg-black text-gray-200 scroll-smooth">
-          <div id="gradient-layer-root" className="relative z-0">
-            <section id="about"><About /></section>
-            <section id="code">
-              <CollapsibleSection title="code" defaultOpen={false} palette="maroon">
-                <Code />
-              </CollapsibleSection>
-            </section>
-            <section id="writing">
-              <CollapsibleSection title="writing" palette="purple">
-                <Writing />
-              </CollapsibleSection>
-            </section>
-            <section id="nous">
-              <CollapsibleSection title="nous" defaultOpen={false}>
-                <Nous />
-              </CollapsibleSection>
-            </section>
-            <section id="music">
-              <CollapsibleSection title="music" defaultOpen={false}>
-                <Music />
-              </CollapsibleSection>
-            </section>
-            <section id="gallery">
-              <CollapsibleSection title="gallery">
-                <Gallery />
-              </CollapsibleSection>
-            </section>
-            <section id="contact">
-              <CollapsibleSection title="contact" defaultOpen={false}>
-                <Contact />
-              </CollapsibleSection>
-            </section>
-          </div>
-        </main>
+      <main className="relative z-10 pt-20 text-gray-200 scroll-smooth">
+        <section id="about"><About /></section>
 
-    </> 
+        <CollapsibleSection title="code"    palette="maroon" setActivePalette={setActivePalette}>
+          <Code />
+        </CollapsibleSection>
+
+        <CollapsibleSection title="writing" palette="purple" setActivePalette={setActivePalette}>
+          <Writing />
+        </CollapsibleSection>
+
+        <CollapsibleSection title="nous"    palette="blue"   setActivePalette={setActivePalette}>
+          <Nous />
+        </CollapsibleSection>
+
+        <CollapsibleSection title="music"   palette="blue"   setActivePalette={setActivePalette}>
+          <Music />
+        </CollapsibleSection>
+
+        <CollapsibleSection title="gallery" palette="blue"   setActivePalette={setActivePalette}>
+          <Gallery />
+        </CollapsibleSection>
+
+        <CollapsibleSection title="contact" palette="blue"   setActivePalette={setActivePalette}>
+          <Contact />
+        </CollapsibleSection>
+      </main>
+    </>
   );
 }

@@ -1,7 +1,5 @@
-import ShadedBackground from "@/components/ShadedBackground";
-
 const About = () => (
-  <ShadedBackground className="min-h-screen">
+
     <div className="px-6 py-20">
       <h2 className="text-3xl font-serif mb-4">about</h2>
       <p className="text-gray-400 max-w-xl mb-8">
@@ -15,7 +13,7 @@ const About = () => (
         <br />
       </p>
     </div>
-  </ShadedBackground>
+
 );
 
 export default About; 
