@@ -11,10 +11,10 @@ import {
   
   const paletteMap = {
     blue: {
-      color1: '#091540',
-      color2: '#7692ff',
-      color3: '#abd2fa',
-      color4: '#1b2cc1',
+      color1: '#0F044C',
+      color2: '#141E61',
+      color3: '#01005E',
+      color4: '#22267B',
     },
     maroon: {
         color1: '#250902',

@@ -1,4 +1,3 @@
-// CollapsibleSection.tsx
 import { useRef, useEffect, useState } from 'react';
 import ShadedBackground from './ShadedBackground';
 
@@ -21,9 +20,16 @@ const CollapsibleSection = ({
   const [contentHeight, setContentHeight] = useState<number>(0);
 
   useEffect(() => {
-    if (contentRef.current) {
-      setContentHeight(contentRef.current.scrollHeight);
-    }
+    if (!contentRef.current) return;
+    setContentHeight(contentRef.current.scrollHeight);
+    // Add ResizeObserver to update height dynamically
+    const observer = new window.ResizeObserver(() => {
+      if (contentRef.current) {
+        setContentHeight(contentRef.current.scrollHeight);
+      }
+    });
+    observer.observe(contentRef.current);
+    return () => observer.disconnect();
   }, [children]);
 
   return (
@@ -50,7 +56,7 @@ const CollapsibleSection = ({
         }}
       >
         <div ref={contentRef}>
-          <ShadedBackground className="px-6 pb-8" palette={palette}>
+          <ShadedBackground className="px-6 pb-8" palette={palette} >
             {children}
           </ShadedBackground>
         </div>

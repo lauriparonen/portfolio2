@@ -24,23 +24,23 @@ const Code = () => (
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
             <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
-            <span>JavaScript/TypeScript</span>
+            <span className="text-gray-200">JavaScript/TypeScript</span>
           </div>
           <div className="flex items-center space-x-2">
             <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
-            <span>React/Next.js</span>
+            <span className="text-gray-200">React/Next.js</span>
           </div>
           <div className="flex items-center space-x-2">
             <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
-            <span>Node.js</span>
+            <span className="text-gray-200">Node.js</span>
           </div>
           <div className="flex items-center space-x-2">
             <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
-            <span>Python</span>
+            <span className="text-gray-200">Python</span>
           </div>
           <div className="flex items-center space-x-2">
             <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
-            <span>excellent natural language skills</span>
+            <span className="text-gray-200">excellent natural language skills</span>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@ const Code = () => (
           />
         </div>
       </div>
-      <p className="text-gray-400 mt-4 max-w-[400px] text-center">
+      <p className="text-gray-400 mt-6 max-w-[400px] text-center">
         A recursive visualization exploring the beauty of self-similarity. Each square contains smaller squares, 
         creating an optical illusion as though the boundaries of the squares vanish into a spiral. Built with p5.js.
       </p>
