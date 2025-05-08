@@ -101,6 +101,30 @@ export default function Music() {
             </div>
           </div>
         </div>
+
+        <div className="text-left text-gray-200">
+          <button
+            onClick={() => toggleSection('idm')}
+            className="flex items-center justify-between w-full text-left text-gray-400 hover:text-white mb-4"
+          >
+            <span>IDM playlist</span>
+            <span className={`transform transition-transform duration-300 ${openSection === 'idm' ? 'rotate-180' : ''}`}>
+              ▼
+            </span>
+          </button>
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openSection === 'idm' ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}>
+            <div className="overflow-hidden rounded-xl shadow-md border border-gray-700">
+              <iframe 
+                title="idm-playlist"
+                className="w-full h-[352px]"
+                src="https://open.spotify.com/embed/playlist/7f1kshQCCRAKXepEzSlreJ?utm_source=generator&theme=0" 
+                frameBorder="0" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+              </iframe>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
