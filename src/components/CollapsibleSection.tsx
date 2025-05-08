@@ -6,7 +6,7 @@ type Props = {
   title: string;
   children: React.ReactNode;
   defaultOpen?: boolean;
-  palette?: 'blue' | 'sunset';
+  palette?: 'blue' | 'maroon' | 'purple';
 };
 
 const CollapsibleSection = ({

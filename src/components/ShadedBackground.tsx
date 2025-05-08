@@ -6,7 +6,7 @@ import {
   type Props = {
     children: ReactNode;
     className?: string;
-    palette?: 'blue' | 'sunset';
+    palette?: 'blue' | 'maroon' | 'purple';
   };
   
   const paletteMap = {
@@ -16,12 +16,18 @@ import {
       color3: '#abd2fa',
       color4: '#1b2cc1',
     },
-    sunset: {
-      color1: '#ff6b6b',
-      color2: '#ffe66d',
-      color3: '#ffb700',
-      color4: '#ff4e50',
+    maroon: {
+        color1: '#250902',
+        color2: '#38040e',
+        color3: '#640d14',
+        color4: '#ad2831',
     },
+    purple: {
+        color1: '#10002b',
+        color2: '#3c096c',
+        color3: '#9d4edd',
+        color4: '#e0aaff',
+    }
   };
   
   const ShadedBackground = ({
