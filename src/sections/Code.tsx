@@ -38,6 +38,10 @@ const Code = () => (
             <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
             <span>Python</span>
           </div>
+          <div className="flex items-center space-x-2">
+            <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
+            <span>excellent natural language skills</span>
+          </div>
         </div>
       </div>
     </div>

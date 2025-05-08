@@ -36,56 +36,68 @@ import {
     palette = 'blue',
   }: Props) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [opacity, setOpacity] = useState(0);
-    const currentRatio = useRef(0);
-    const raf = useRef<number>(0);
-  
-    const tick = () => {
-      setOpacity(currentRatio.current);
-      raf.current = requestAnimationFrame(tick);
-    };
-  
-    useEffect(() => {
-      if (!containerRef.current) return;
-      const io = new IntersectionObserver(
-        ([entry]) => (currentRatio.current = entry.intersectionRatio),
-        { threshold: [0, 0.25, 0.5, 0.75, 1] }
-      );
-      io.observe(containerRef.current);
-      raf.current = requestAnimationFrame(tick);
-      return () => {
-        io.disconnect();
-        raf.current && cancelAnimationFrame(raf.current);
-      };
-    }, []);
-  
+    const [isMobile, setIsMobile] = useState(false);
     const colors = paletteMap[palette];
-  
+
+    useEffect(() => {
+      const checkMobile = () => {
+        const isMobileDevice = 
+          /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ||
+          (window.innerWidth <= 768);
+        setIsMobile(isMobileDevice);
+      };
+      
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
       <div ref={containerRef} className={`relative overflow-hidden ${className}`}>
         {/* Section-local gradient, laid behind content */}
         <div
           className="absolute inset-0 z-0 pointer-events-none"
           style={{
-            opacity: opacity * 0.4,
+            opacity: 0.4,
             maskImage:
               'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)',
             WebkitMaskImage:
               'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)',
           }}
         >
-          <MeshGradient
-            {...colors}
-            speed={0.08}
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-          />
+          {!isMobile && (
+            <MeshGradient
+              {...colors}
+              speed={0.08}
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+            />
+          )}
+          {isMobile && (
+            <div 
+              style={{
+                width: '100%',
+                height: '100%',
+                background: `linear-gradient(45deg, ${colors.color1}, ${colors.color2}, ${colors.color3}, ${colors.color4})`,
+                backgroundSize: '400% 400%',
+                animation: 'gradient 15s ease infinite',
+              }}
+            />
+          )}
         </div>
-  
+
         {/* Actual content */}
         <div className="relative z-10">{children}</div>
+
+        <style jsx>{`
+          @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+        `}</style>
       </div>
     );
   };
