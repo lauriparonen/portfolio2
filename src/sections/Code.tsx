@@ -1,7 +1,5 @@
-import CollapsibleSection from "@/components/CollapsibleSection";
-
 const Code = () => (
-  <CollapsibleSection title="code" defaultOpen={false}>
+  <div className="space-y-8">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div className="space-y-4">
         <h3 className="text-xl font-serif">projects</h3>
@@ -43,6 +41,7 @@ const Code = () => (
         </div>
       </div>
     </div>
+    
     <div className="mt-8 flex flex-col items-center">
       <div className="bg-black rounded-lg w-full max-w-[400px]">
         <div className="relative w-full" style={{ paddingBottom: '110.5%' }}>
@@ -70,7 +69,7 @@ const Code = () => (
         creating an optical illusion as though the boundaries of the squares vanish into a spiral. Built with p5.js.
       </p>
     </div>
-  </CollapsibleSection>
+  </div>
 );
 
 export default Code;

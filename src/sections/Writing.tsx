@@ -1,7 +1,5 @@
-import CollapsibleSection from "@/components/CollapsibleSection";
-
 const Writing = () => (
-  <CollapsibleSection title="writing">
+  <div>
     <p className="text-gray-400 max-w-xl mb-8">
       For some years now, I have had an intermittent, overarching desire to verbalize
       ideas—specifically ones pertaining to mystical philosophy and <i>ways of liberation</i>. 
@@ -24,7 +22,7 @@ const Writing = () => (
         ></iframe>
       </div>
     </div>
-  </CollapsibleSection>
+  </div>
 );
 
 export default Writing;

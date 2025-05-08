@@ -1,4 +1,3 @@
-import CollapsibleSection from "@/components/CollapsibleSection";
 import ImageCarousel from "@/components/ImageCarousel";
 
 // Array for image filenames
@@ -18,7 +17,7 @@ const imageData = [
     "DALL·E 2023-04-30 14.33.49 - A mysterious, blue pattern of light on a dark background, waves of light diffracted in water.png",
     "DALL·E 2023-04-30 14.33.59 - A nebula in the shape of a rose, beautiful detailed renassaince oil painting.png",
     "DALL·E 2023-04-30 14.34.21 - Spiral nebula, magnificent oil painting by Odilon Redon.png",
-    "DALL·E 2023-04-30 14.34.40 - A highly detailed DSLR image of Hokusai’s The Great Wave off Kanagawa.png",
+    "DALL·E 2023-04-30 14.34.40 - A highly detailed DSLR image of Hokusai's The Great Wave off Kanagawa.png",
     "DALL·E 2023-04-30 14.34.51 - Clouds in a Monet oil painting, with subtle psychedelic details.png",
     "DALL·E 2023-04-30 14.35.04 - Extremely detailed oil painting of a cat by Von Wright, high definition.png",
     "DALL·E 2023-04-30 14.35.19 - Extremely detailed oil painting of an owl by Von Wright, high definition.png",
@@ -87,7 +86,7 @@ const imageData = [
 ];
 
 const Gallery = () => (
-  <CollapsibleSection title="gallery" >
+  <div>
     <div className="flex flex-col md:flex-row gap-12">
       <div className="md:w-1/2 max-w-xl text-gray-400 text-sm leading-relaxed">
         <p className="text-gray-400 max-w-xl mb-8">
@@ -104,12 +103,9 @@ const Gallery = () => (
           to celebrate the transience of this specific model. I shall always have a soft spot in my memory for it.
         </p>
       </div>
-
-      <div className="md:w-1/2">
-        <ImageCarousel images={imageData} />
-      </div>
+      <ImageCarousel images={imageData} />
     </div>
-  </CollapsibleSection>
+  </div>
 );
 
 export default Gallery;

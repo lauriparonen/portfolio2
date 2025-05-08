@@ -8,6 +8,9 @@ import Music from "@/sections/Music";
 import Gallery from "@/sections/Gallery";
 import Contact from "@/sections/Contact";
 import About from "@/sections/About";
+import { GradientProvider } from "@/components/GradientProvider";
+import CollapsibleSection from "@/components/CollapsibleSection";
+
 //import CollapsibleSection from "@/components/CollapsibleSection"; for future use
 
 export default function Home() {
@@ -18,15 +21,43 @@ export default function Home() {
         <meta name="description" content="Developer, writer, and sound tinkerer" />
       </Head>
       <Header />
-      <main className="pt-20 bg-black text-gray-200 scroll-smooth">
-        <section id="about"><About /></section>
-        <section id="code"><Code /></section>
-        <section id="writing"><Writing /></section>
-        <section id="nous"><Nous /></section>
-        <section id="music"><Music /></section>
-        <section id="gallery"><Gallery /></section>
-        <section id="contact"><Contact /></section>
-      </main>
-    </>
+      <GradientProvider>
+        <main className="pt-20 bg-black text-gray-200 scroll-smooth">
+          <div id="gradient-layer-root" className="relative z-0">
+            <section id="about"><About /></section>
+            <section id="code">
+              <CollapsibleSection title="code" defaultOpen={false} palette="sunset">
+                <Code />
+              </CollapsibleSection>
+            </section>
+            <section id="writing">
+              <CollapsibleSection title="writing">
+                <Writing />
+              </CollapsibleSection>
+            </section>
+            <section id="nous">
+              <CollapsibleSection title="nous" defaultOpen={false}>
+                <Nous />
+              </CollapsibleSection>
+            </section>
+            <section id="music">
+              <CollapsibleSection title="music" defaultOpen={false}>
+                <Music />
+              </CollapsibleSection>
+            </section>
+            <section id="gallery">
+              <CollapsibleSection title="gallery">
+                <Gallery />
+              </CollapsibleSection>
+            </section>
+            <section id="contact">
+              <CollapsibleSection title="contact" defaultOpen={false}>
+                <Contact />
+              </CollapsibleSection>
+            </section>
+          </div>
+        </main>
+      </GradientProvider>
+    </> 
   );
 }

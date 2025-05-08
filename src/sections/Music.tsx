@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Visualizer3D from "@/components/Visualizer3D";
 import { useState } from "react";
-import CollapsibleSection from "@/components/CollapsibleSection";
 
 export default function Music() {
   const [openSection, setOpenSection] = useState<string | null>(null);
@@ -11,7 +10,7 @@ export default function Music() {
   };
 
   return (
-    <CollapsibleSection title="music" defaultOpen={false}>
+    <div>
       <p className="text-gray-400 max-w-xl mb-8">
         I sometimes tinker with sound. Below you can find my music on SoundCloud and Spotify,
         as well as a collection of 3D particle visualizers that dance to my music.
@@ -103,6 +102,6 @@ export default function Music() {
           </div>
         </div>
       </div>
-    </CollapsibleSection>
+    </div>
   );
 }
