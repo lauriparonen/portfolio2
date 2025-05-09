@@ -56,7 +56,7 @@ const CollapsibleSection = ({
         }}
       >
         <div ref={contentRef}>
-          <ShadedBackground className="px-6 pb-8" palette={palette} >
+          <ShadedBackground className="px-6 pb-8" palette={palette} forceFallback={true}>
             {children}
           </ShadedBackground>
         </div>

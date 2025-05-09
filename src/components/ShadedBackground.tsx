@@ -9,6 +9,7 @@ import {
     children: ReactNode;
     className?: string;
     palette?: 'blue' | 'maroon' | 'purple';
+    forceFallback?: boolean;
   };
   
   const paletteMap = {
@@ -61,6 +62,7 @@ import {
     children,
     className = '',
     palette = 'blue',
+    forceFallback = false,
   }: Props) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isMobile, setIsMobile] = useState(false);
@@ -148,7 +150,7 @@ import {
               'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)',
           }}
         >
-          {!isMobile && shouldLoadShader ? (
+          {!isMobile && !forceFallback && shouldLoadShader ? (
             <Suspense fallback={<GradientFallback colors={colors} />}>
               <MeshGradient
                 {...colors}
