@@ -1,6 +1,7 @@
 "use client";
 
 import Visualizer3D from "@/components/Visualizer3D";
+import Visualizer2D from "@/components/Visualizer2D";
 import Link from "next/link";
 
 export default function VisualizerPage() {
@@ -15,7 +16,8 @@ export default function VisualizerPage() {
             ← back to main page
           </Link>
         </div>
-        <Visualizer3D src="/audio/grassblades.mp3" />
+        {/*<Visualizer3D src="/audio/grassblades.mp3" />*/}
+        <Visualizer2D audioSrc="/audio/grassblades.mp3" />
       </div>
     </div>
   );

@@ -20,12 +20,12 @@ import {
     },
     maroon: {
         color1: '#250902',
-        color2: '#38040e',
+        color2: '#0f0000',
         color3: '#640d14',
         color4: '#ad2831',
     },
     purple: {
-        color1: '#10002b',
+        color1: '#0e0024',
         color2: '#3c096c',
         color3: '#9d4edd',
         color4: '#e0aaff',
