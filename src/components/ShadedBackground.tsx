@@ -26,10 +26,10 @@ import {
         color4: '#ad2831',
     },
     purple: {
-        color1: '#0e0024',
-        color2: '#3c096c',
-        color3: '#9d4edd',
-        color4: '#e0aaff',
+        color1: '#211C84',
+        color2: '#4D55CC',
+        color3: '#7A73D1',
+        color4: '#B5A8D5',
     }
   };
   

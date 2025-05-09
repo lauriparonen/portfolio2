@@ -68,7 +68,7 @@ const About = () => {
       >
         <div className="bg-black/0 text-gray-400 rounded-lg px-4 py-4 border border-white/0 border-t-0 text-sm max-w-xl mx-auto">
           <p>
-            In Zen Buddhist symbolism, the enso is a circle that represents <i>emptiness</i>.
+            In Zen Buddhist symbolism, the <a href="https://en.wikipedia.org/wiki/Enso" className="text-blue-200 hover:underline" target="_blank" rel="noopener noreferrer">enso</a> is a circle that represents <i>emptiness</i>.
             A common practice involves drawing the enso, or rather letting it draw itself,
             as part of the process of meditation. A master can discern a practitioner's adepthood instantly from the enso.
             <br />

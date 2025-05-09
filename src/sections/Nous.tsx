@@ -2,9 +2,7 @@ const Nous = () => (
   <div>
 
     <p className="text-gray-400">
-      <i>Nous</i> (<i>νοῦς</i>) is Greek for <i>mind</i>.
-      <br />
-      <br />
+      <i>Nous</i> (<i>νοῦς</i>) is Greek for <i>mind</i>. 
       This section contains an embed of my Cosmos page, a peer into my aesthetic and noetic sensibilities.
       </p>
 

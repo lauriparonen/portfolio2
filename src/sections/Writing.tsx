@@ -2,7 +2,10 @@ const Writing = () => (
   <div>
     <p className="text-gray-400 max-w-xl mb-8">
       For some years now, I have had an intermittent, overarching desire to verbalize
-      ideas—specifically ones pertaining to mystical philosophy and <i>ways of liberation</i>. 
+      ideas—specifically ones pertaining to mystical philosophy and 
+      <i> <a href="https://www.goodreads.com/quotes/9948686-the-ways-of-liberation-are-of-course-concerned-with-making" className="text-blue-200 hover:underline" target="_blank" rel="noopener noreferrer">
+      ways of liberation</a></i>. 
+
       You can find my longer-form writing <a href="https://foodofthegods.substack.com/" className="text-blue-200 hover:underline">here</a>, on my Substack.
     </p>
     
