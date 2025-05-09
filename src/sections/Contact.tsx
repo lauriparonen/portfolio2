@@ -5,6 +5,7 @@ const Contact = () => (
       <a className="text-gray-400 hover:text-white transition-colors">
         lauriparonen0 [at] gmail [dot] com
       </a>
+      <p className="text-gray-400 text-sm">(cat pictures welcome)</p>
     </div>
     <div>
       <h3 className="text-xl font-serif mb-2">Social</h3>
@@ -15,7 +16,7 @@ const Contact = () => (
         <a href="https://www.linkedin.com/in/lauri-paronen-4b0651291" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors block">
           linkedin
         </a>
-        <a href="https://instagram.com/lauri.618" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors block">
+        <a href="https://instagram.com/lauri1.618" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors block">
           instagram
         </a>
       </div>

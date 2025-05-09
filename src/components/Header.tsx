@@ -41,6 +41,7 @@ const Header = ({ onSectionClick }: Props) => {
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
           <div className="text-lg font-semibold font-serif tracking-wide text-center sm:text-left">
             lauri paronen
+            {/* <img src="/ensologo-circle.svg" alt="enso laurel" className="inline-block h-4 w-4 ml-2" /> */}
           </div>
           <nav className="flex flex-wrap justify-center sm:justify-end gap-4 text-sm">
             <a href="#code" onClick={(e) => handleClick(e, 'code')} className="hover:text-white transition">code</a>

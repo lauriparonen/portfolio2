@@ -10,7 +10,7 @@ const Code = () => {
           <h3 className="text-xl font-serif">projects</h3>
           <div className="space-y-6">
             <div>
-              <h4 className="text-lg font-medium">
+              <h4 className="text-lg font-medium underline hover:text-blue-200">
                 <a href="https://f0tg.github.io/osic" className="hover:underline">one shot i ching</a>
               </h4>
               <p className="text-gray-400">
@@ -18,6 +18,7 @@ const Code = () => {
                 Generates each reading based on truly random data from <a href="random.org" className="text-blue-200 hover:underline">random.org</a>.
               </p>
             </div>
+
             <div>
               <h4 className="text-lg font-medium">recursive spiral squares</h4>
               <p className="text-gray-400">
@@ -57,6 +58,16 @@ const Code = () => {
                 </div>
               )}
             </div>
+
+            <div>
+              <h4 className="text-lg font-medium underline hover:text-blue-200">
+                <a href="https://github.com/lauriparonen" target="_blank" rel="noopener noreferrer">misc projects</a>
+              </h4>
+              <p className="text-gray-400" >
+                My GitHub for miscellaneous projects and WIPs.
+              </p>
+            </div>
+
           </div>
         </div>
         <div className="space-y-4">
