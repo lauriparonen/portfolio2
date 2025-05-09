@@ -37,8 +37,7 @@ const About = () => {
       </div>
       
       <div 
-        className="w-40 h-40 mx-auto my-8 relative
-          md:absolute md:right-0 md:bottom-20 md:w-48 md:h-48 md:my-0 md:mx-0"
+        className="w-40 h-40 mx-auto my-8 relative md:w-48 md:h-48"
         style={{
           transform: `rotate(${scrollY * 0.2}deg)`,
           opacity: Math.max(0.3, 1 - scrollY * 0.001),
