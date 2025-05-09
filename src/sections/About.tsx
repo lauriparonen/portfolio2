@@ -25,8 +25,7 @@ const About = () => {
           <br />
           <br />
           BSc, Computer Science
-          <br />
-          currently pursuing MSc, Computer Science
+
           <br />
           <br />
           
@@ -38,14 +37,11 @@ const About = () => {
       </div>
       
       <div 
-        className="absolute right-0 bottom-50 w-48 h-48 transition-all duration-200 pointer-events-none
-          md:static md:mx-0 md:my-0 md:relative md:right-0 md:bottom-0
-          sm:relative sm:mx-auto sm:left-0 sm:right-0 sm:bottom-0 "
+        className="w-40 h-40 mx-auto my-8 relative
+          md:absolute md:right-0 md:bottom-20 md:w-48 md:h-48 md:my-0 md:mx-0"
         style={{
-          
-          transform: `rotate(${scrollY * 0.08}deg)`,
+          transform: `rotate(${scrollY * 0.2}deg)`,
           opacity: Math.max(0.3, 1 - scrollY * 0.001),
-          
         }}
       >
         <Image
