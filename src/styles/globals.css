@@ -27,4 +27,10 @@ body {
 
 html {
   scroll-behavior: smooth;
+  background-color: #000;
+  color: #fff;
+}
+
+:root {
+  color-scheme: light dark;
 }

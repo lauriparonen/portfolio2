@@ -112,12 +112,14 @@ function useMediaQuery(query: string) {
 const Visualizer = ({ audioSrc }: VisualizerProps) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const shaderRef = useRef<any>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [audioData, setAudioData] = useState({ bass: 0, mid: 0, treble: 0 });
   const [restingColors, setRestingColors] = useState(DEFAULT_COLORS);
   const [showColorPicker, setShowColorPicker] = useState(false);
+  const [isMounted, setIsMounted] = useState(true);
 
   /* ——— Fullscreen tracking ——— */
   useEffect(() => {
@@ -247,16 +249,31 @@ const Visualizer = ({ audioSrc }: VisualizerProps) => {
     setRestingColors(DEFAULT_COLORS);
   };
 
+  // Add cleanup on unmount
+  useEffect(() => {
+    return () => {
+      setIsMounted(false);
+      // Ensure audio is stopped and cleaned up
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+      }
+    };
+  }, []);
+
   /* ——— render ——— */
   const isMobile = useMediaQuery("(max-width: 768px)");
+
+  if (!isMounted) return null;
 
   return (
     <div className="flex flex-col gap-4">
       <div ref={containerRef} className="relative h-[600px] w-full">
         <div className="absolute inset-0 rounded-2xl overflow-hidden">
           <MeshGradient
+            ref={shaderRef}
             {...getColors()}
-            speed={0.12 + (audioData.bass + audioData.mid + audioData.treble) * 0.06}
+            speed={0.12 + (audioData.bass + audioData.mid + (audioData.treble * 1.2)) * 0.06}
             style={{ width: "100%", height: "100%" }}
           />
         </div>

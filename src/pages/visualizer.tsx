@@ -52,7 +52,7 @@ export default function VisualizerPage() {
         <div className="mt-8 flex justify-center">
           <button
             onClick={() => setShowInfo(true)}
-            className="rounded-lg bg-black/70 px-4 py-2 text-white transition-all duration-300 hover:bg-black/90 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+            className="text-gray-400 hover:text-white transition-colors border border-gray-800 rounded-lg px-4 py-2 hover:border-gray-600"
           >
             about
           </button>
