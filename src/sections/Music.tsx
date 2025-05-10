@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Visualizer3D from "@/components/Visualizer3D";
+//import Visualizer3D from "@/components/Visualizer3D";
 import { useState } from "react";
 
 export default function Music() {
