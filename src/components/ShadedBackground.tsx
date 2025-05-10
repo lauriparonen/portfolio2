@@ -154,7 +154,7 @@ import {
             <Suspense fallback={<GradientFallback colors={colors} />}>
               <MeshGradient
                 {...colors}
-                speed={qualityLevel.speed}
+                speed={qualityLevel.speed} 
                 onFrame={handleFrame}
                 style={{
                   width: '100%',
