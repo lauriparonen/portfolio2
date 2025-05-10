@@ -39,10 +39,10 @@ import {
   
   // Quality levels for different viewport positions
   const QUALITY_LEVELS = {
-    ACTIVE: { resolution: 1, speed: 0.08 },
-    NEARBY: { resolution: 0.75, speed: 0.06 },
-    DISTANT: { resolution: 0.5, speed: 0.04 },
-    DORMANT: { resolution: 0.25, speed: 0.02 }
+    ACTIVE: { speed: 0.08 },
+    NEARBY: { speed: 0.06 },
+    DISTANT: { speed: 0.04 },
+    DORMANT: { speed: 0.02 }
   };
 
   // Simple gradient fallback while shader loads
