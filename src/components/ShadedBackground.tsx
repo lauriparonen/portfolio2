@@ -128,16 +128,7 @@ import {
       return () => observer.disconnect();
     }, []);
 
-    /** 
-    const handleFrame = (timestamp: number) => {
-      if (!isVisible) return false;
-      if (timestamp - lastFrameTime >= FRAME_TIME) {
-        setLastFrameTime(timestamp);
-        return true;
-      }
-      return false;
-    };
-    */
+
 
     return (
       <div ref={containerRef} className={`relative overflow-hidden ${className}`}>
@@ -157,7 +148,7 @@ import {
               <MeshGradient
                 {...colors}
                 speed={qualityLevel.speed} 
-                {/* onFrame={handleFrame} */}
+
                 style={{
                   width: '100%',
                   height: '100%',
