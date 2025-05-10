@@ -155,7 +155,6 @@ import {
               <MeshGradient
                 {...colors}
                 speed={qualityLevel.speed}
-                resolution={qualityLevel.resolution}
                 onFrame={handleFrame}
                 style={{
                   width: '100%',

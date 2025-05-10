@@ -1,7 +1,7 @@
 "use client";
 
 import Visualizer3D from "@/components/Visualizer3D";
-//import Visualizer2D from "@/components/Visualizer2D";
+import Visualizer2D from "@/components/Visualizer2D";
 import Link from "next/link";
 import { useState } from "react";
 
