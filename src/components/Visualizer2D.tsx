@@ -20,7 +20,7 @@ type VisualizerProps = {
   audioSrc: string;
 };
 
-const RESTING_COLORS = {
+const DEFAULT_COLORS = {
   color1: "hsl(220, 65%, 18%)", // deep midnight
   color2: "hsl(260, 45%, 15%)", // purple
   color3: "hsl(240, 35%, 16%)", // navy
@@ -37,10 +37,75 @@ function smooth(prev: number, next: number, coeff = 0.95) {
 function clamp01(x: number) {
   return Math.max(0, Math.min(1, x));
 }
+
+// Convert hex to HSL
+function hexToHSL(hex: string): [number, number, number] {
+  // Remove the hash if it exists
+  hex = hex.replace('#', '');
+  
+  // Convert hex to RGB
+  const r = parseInt(hex.substring(0, 2), 16) / 255;
+  const g = parseInt(hex.substring(2, 4), 16) / 255;
+  const b = parseInt(hex.substring(4, 6), 16) / 255;
+  
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h = 0;
+  let s = 0;
+  const l = (max + min) / 2;
+
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+    
+    h /= 6;
+  }
+
+  return [
+    Math.round(h * 360),
+    Math.round(s * 100),
+    Math.round(l * 100)
+  ];
+}
+
 function lerpColor(a: string, b: string, t: number) {
-  const [ah, as, al] = a.match(/\d+/g)!.map(Number);
-  const [bh, bs, bl] = b.match(/\d+/g)!.map(Number);
+  // Handle hex colors
+  const isHex = (color: string) => color.startsWith('#');
+  
+  // Convert colors to HSL if they're in hex format
+  const [ah, as, al] = isHex(a) ? hexToHSL(a) : a.match(/\d+/g)!.map(Number);
+  const [bh, bs, bl] = isHex(b) ? hexToHSL(b) : b.match(/\d+/g)!.map(Number);
+  
   return `hsl(${lerp(ah, bh, t)}, ${lerp(as, bs, t)}%, ${lerp(al, bl, t)}%)`;
+}
+
+// Add useMediaQuery hook
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => setMatches(media.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, [matches, query]);
+
+  return matches;
 }
 
 // —————————————————————————————————— component
@@ -51,6 +116,8 @@ const Visualizer = ({ audioSrc }: VisualizerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [audioData, setAudioData] = useState({ bass: 0, mid: 0, treble: 0 });
+  const [restingColors, setRestingColors] = useState(DEFAULT_COLORS);
+  const [showColorPicker, setShowColorPicker] = useState(false);
 
   /* ——— Fullscreen tracking ——— */
   useEffect(() => {
@@ -138,26 +205,51 @@ const Visualizer = ({ audioSrc }: VisualizerProps) => {
 
   /* ——— Dynamic colours ——— */
   const getColors = () => {
-    if (!isPlaying) return RESTING_COLORS;
+    if (!isPlaying) return restingColors;
 
     const { bass, mid, treble } = audioData;
 
-    const vib1 = `hsl(${Math.round(160 - bass * 80)}, 90%, ${50 + bass * 30}%)`; // bass → cyan‑green
-    const vib2 = `hsl(${Math.round(280 + mid * 80)}, 95%, ${48 + mid * 30}%)`;   // mid → purple‑pink
-    const vib3 = `hsl(${Math.round(40 + treble * 60)}, 92%, ${46 + treble * 30}%)`; // treble → yellow‑orange
-    const vib4 = `hsl(${Math.round(200 + (bass + mid + treble) * 160)}, 88%, ${44 + (bass + mid + treble) * 30}%)`;
+    // Extract base hues from resting colors
+    const getHue = (color: string) => {
+      const isHex = color.startsWith('#');
+      return isHex ? hexToHSL(color)[0] : parseInt(color.match(/\d+/g)![0]);
+    };
+
+    const baseHue1 = getHue(restingColors.color1);
+    const baseHue2 = getHue(restingColors.color2);
+    const baseHue3 = getHue(restingColors.color3);
+    const baseHue4 = getHue(restingColors.color4);
+
+    // Generate vibrant colors based on resting colors' hues
+    const vib1 = `hsl(${Math.round(baseHue1 + bass * 80)}, 90%, ${50 + bass * 30}%)`;
+    const vib2 = `hsl(${Math.round(baseHue2 + mid * 80)}, 95%, ${48 + mid * 30}%)`;
+    const vib3 = `hsl(${Math.round(baseHue3 + treble * 60)}, 92%, ${46 + treble * 30}%)`;
+    const vib4 = `hsl(${Math.round(baseHue4 + (bass + mid + treble) * 60)}, 88%, ${44 + (bass + mid + treble) * 30}%)`;
 
     const energy = clamp01((bass + mid + treble) / 1.1);
 
     return {
-      color1: lerpColor(RESTING_COLORS.color1, vib1, energy),
-      color2: lerpColor(RESTING_COLORS.color2, vib2, energy),
-      color3: lerpColor(RESTING_COLORS.color3, vib3, energy),
-      color4: lerpColor(RESTING_COLORS.color4, vib4, energy),
+      color1: lerpColor(restingColors.color1, vib1, energy),
+      color2: lerpColor(restingColors.color2, vib2, energy),
+      color3: lerpColor(restingColors.color3, vib3, energy),
+      color4: lerpColor(restingColors.color4, vib4, energy),
     } as const;
   };
 
+  const handleColorChange = (key: keyof typeof restingColors, value: string) => {
+    setRestingColors(prev => ({
+      ...prev,
+      [key]: value
+    }));
+  };
+
+  const resetColors = () => {
+    setRestingColors(DEFAULT_COLORS);
+  };
+
   /* ——— render ——— */
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <div className="flex flex-col gap-4">
       <div ref={containerRef} className="relative h-[600px] w-full">
@@ -170,14 +262,55 @@ const Visualizer = ({ audioSrc }: VisualizerProps) => {
         </div>
       </div>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-4">
         <audio ref={audioRef} src={audioSrc} controls className="mx-auto block" />
-        <button
-          onClick={toggleFullscreen}
-          className="mt-4 rounded bg-black/70 px-4 py-2 text-white transition hover:bg-black/90"
+        <div className="flex gap-2">
+          {!isMobile && (
+            <button
+              onClick={toggleFullscreen}
+              className="rounded-lg bg-black/70 px-4 py-2 text-white transition-all duration-300 hover:bg-black/90 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+            >
+              {isFullscreen ? "exit fullscreen" : "fullscreen"}
+            </button>
+          )}
+          <button
+            onClick={() => setShowColorPicker(!showColorPicker)}
+            className="rounded-lg bg-black/70 px-4 py-2 text-white transition-all duration-300 hover:bg-black/90 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+          >
+            {showColorPicker ? "hide colors" : "edit colors"}
+          </button>
+        </div>
+
+        <div 
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            showColorPicker ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
         >
-          {isFullscreen ? "exit fullscreen" : "fullscreen"}
-        </button>
+          <div className="mt-4 flex flex-col gap-4 rounded-lg bg-black/70 p-4">
+            <div className="grid grid-cols-2 gap-4">
+              {Object.entries(restingColors).map(([key, value]) => (
+                <div key={key} className="flex flex-col gap-2">
+                  <label className="text-sm text-white">{key}</label>
+                  <div className="relative">
+                    <input
+                      type="color"
+                      value={value}
+                      onChange={(e) => handleColorChange(key as keyof typeof restingColors, e.target.value)}
+                      className="h-10 w-full cursor-pointer rounded border-2 border-white/20 bg-white/10 shadow-[0_0_0_2px_rgba(255,255,255,0.1)] transition-all hover:border-white/40 focus:border-white/60 focus:shadow-[0_0_0_4px_rgba(255,255,255,0.2)]"
+                    />
+                    <div className="absolute inset-0 pointer-events-none rounded bg-gradient-to-br from-white/5 to-transparent" />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={resetColors}
+              className="rounded-lg bg-white/10 px-4 py-2 text-white transition-all duration-300 hover:bg-white/20 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+            >
+              reset colors
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

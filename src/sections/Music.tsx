@@ -12,8 +12,9 @@ export default function Music() {
   return (
     <div>
       <p className="text-gray-400 max-w-xl mb-8">
-        I sometimes tinker with sound. Below you can find my music on SoundCloud and Spotify,
-        as well as a collection of 3D particle visualizers that dance to my music.
+        I sometimes tinker with sound. Below you can find my music on SoundCloud and Spotify.
+        The <i>visualizer</i> button takes you to a page where you can find a mesh gradient audio visualizer. 
+        It initially plays <i>Epilysis</i>, an ambient track of mine; but you can also visualize your own audio files	♪♪♪ ヽ(ˇ∀ˇ )ゞ
       </p>
 
       <div className="flex justify-center mb-8">
@@ -22,7 +23,7 @@ export default function Music() {
           target="_blank"
           className="bg-black text-white border border-gray-900 rounded px-6 py-3 hover:border-gray-500 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500/20"
         >
-          visualizers
+          visualizer
         </Link>
       </div>
       
