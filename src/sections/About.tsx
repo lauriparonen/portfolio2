@@ -70,11 +70,13 @@ const About = () => {
           <p>
             In Zen Buddhist symbolism, the <a href="https://en.wikipedia.org/wiki/Enso" className="text-blue-200 hover:underline" target="_blank" rel="noopener noreferrer">enso</a> is a circle that represents <i>emptiness</i>.
             A common practice involves drawing the enso, or rather letting it draw itself,
-            as part of the process of meditation. A master can discern a practitioner's adepthood instantly from the enso.
+            as part of the process of meditation. In a glance at the enso, a master can detect its creator's presence—or <a href="https://en.wikipedia.org/wiki/Anatt%C4%81" className="text-blue-200 hover:underline" target="_blank" rel="noopener noreferrer"><i>absence</i></a>—of self.
             <br />
             <br />
-            In the logo above, the other side of the enso is a <i>laurel</i>. I choose to believe in nominative determinism—that my name deriving from this evergreen decorum used to crown
-            victors is a token of the Fates looking over me. Bridging the two is an apt reminder for both <i>victory</i> and <i>emptiness</i>.
+            On the other side of the enso is a <i>laurel</i>: the evergreen crown of triumph, but also a nod to <i>Lauri</i>, my given name. 
+            I like to entertain a belief in <i>nominative determinism</i>—that my name, derived from an ancient symbol of victory, suggests 
+            something about my destiny. But more than that, the <i>enso</i>, symbolizing <i>emptiness</i> and <i>no-self</i>, woven with the <i>laurel</i>, a symbol of my identity, 
+            forms a quiet dialectic and personal reminder: <i>being</i> and <i>non-being</i>; <i>selfhood</i> and its fundamental relativity. 📿
             <br />
             <br />
             <i>—Lauri</i>
