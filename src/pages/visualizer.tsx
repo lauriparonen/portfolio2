@@ -62,14 +62,14 @@ export default function VisualizerPage() {
               <div className="bg-gray-900 rounded-xl p-6 max-w-lg">
                 <h3 className="text-xl text-white mb-4">about the visualizer</h3>
                 <p className="text-gray-300 mb-4">
-                  This audio-reactive gradient visualizer analyzes your music in real-time, 
+                  This audio-reactive gradient visualizer analyzes music in real-time, 
                   separating it into bass, mid, and treble frequencies. The colors and movement 
                   respond dynamically to the energy in each frequency band.
                 </p>
                 <p className="text-gray-300 mb-6">
                   You can customize the base colors using the color picker, and the visualizer 
-                  will generate vibrant variations based on the audio input. The colors change dynamically and
-                  somewhat unpredictably, making each visualization organic and unique.
+                  will generate vibrant variations based on the audio input. The colors change and move
+                   unpredictably, making each visualization organic and unique.
                 </p>
                 <p className="text-gray-300 mb-6">
                   The default track is <i>Epilysis</i>, an ambient track of mine. 

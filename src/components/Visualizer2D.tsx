@@ -222,13 +222,21 @@ const Visualizer = ({ audioSrc }: VisualizerProps) => {
     const baseHue3 = getHue(restingColors.color3);
     const baseHue4 = getHue(restingColors.color4);
 
-    // Generate vibrant colors based on resting colors' hues
+    const energy = clamp01((bass + mid + treble) / 1.1);
+
+    // Generate vibrant colors based on resting colors' hues - higher L for a pastel look
     const vib1 = `hsl(${Math.round(baseHue1 + bass * 80)}, 90%, ${50 + bass * 30}%)`;
     const vib2 = `hsl(${Math.round(baseHue2 + mid * 80)}, 95%, ${48 + mid * 30}%)`;
     const vib3 = `hsl(${Math.round(baseHue3 + treble * 60)}, 92%, ${46 + treble * 30}%)`;
     const vib4 = `hsl(${Math.round(baseHue4 + (bass + mid + treble) * 60)}, 88%, ${44 + (bass + mid + treble) * 30}%)`;
 
-    const energy = clamp01((bass + mid + treble) / 1.1);
+    // Less brightness:
+    //const vib1 = `hsl(${Math.round(baseHue1 + bass * 90)}, 90%, ${28 + bass * 20}%)`;
+    //const vib2 = `hsl(${Math.round(baseHue2 + mid  * 80)}, 92%, ${26 + mid  * 20}%)`;
+    //const vib3 = `hsl(${Math.round(baseHue3 + treble* 60)}, 90%, ${24 + treble* 30}%)`;
+    //const vib4 = `hsl(${Math.round(baseHue4 + energy* 60)}, 88%, ${42 + energy* 30}%)`;
+
+    
 
     return {
       color1: lerpColor(restingColors.color1, vib1, energy),
