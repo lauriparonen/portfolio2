@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ShadedBackground from "@/components/ShadedBackground";
+import GradientBackground from "@/components/GradientBackground";
 import Image from "next/image";
 
 const About = () => {
@@ -15,7 +15,7 @@ const About = () => {
   }, []);
 
   return (
-    <ShadedBackground className="min-h-screen relative">
+    <GradientBackground className="min-h-screen relative">
       <div className="px-6 py-20">
         <h2 className="text-3xl font-serif mb-4">about</h2>
         <p className="text-gray-400 max-w-xl mb-8">
@@ -81,7 +81,7 @@ const About = () => {
           </p>
         </div>
       </div>
-    </ShadedBackground>
+    </GradientBackground>
   );
 };
 

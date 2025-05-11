@@ -1,9 +1,9 @@
-import { useRef, useEffect, useState } from 'react';
-import ShadedBackground from './ShadedBackground';
+import { useRef, useEffect, useState, ReactNode } from 'react';
+import GradientBackground from './GradientBackground';
 
 type Props = {
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
   isOpen: boolean;
   onToggle: () => void;
   palette?: 'blue' | 'maroon' | 'purple';
@@ -56,9 +56,9 @@ const CollapsibleSection = ({
         }}
       >
         <div ref={contentRef}>
-          <ShadedBackground className="px-6 pb-8" palette={palette} forceFallback={true}>
+          <GradientBackground className="px-6 pb-8" palette={palette}>
             {children}
-          </ShadedBackground>
+          </GradientBackground>
         </div>
       </div>
     </section>

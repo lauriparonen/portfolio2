@@ -1,7 +1,6 @@
 // src/pages/index.tsx
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from "next/head";
-import { useRouter } from 'next/router';
 import Header from "@/components/Header";
 import Code from "@/sections/Code";
 import Writing from "@/sections/Writing";
@@ -11,46 +10,21 @@ import Gallery from "@/sections/Gallery";
 import Contact from "@/sections/Contact";
 import About from "@/sections/About";
 import CollapsibleSection from "@/components/CollapsibleSection";
-import ShadedBackground from '@/components/ShadedBackground';
+import GradientBackground from '@/components/GradientBackground';
 
 type Palette = 'blue' | 'maroon' | 'purple';
 
 export default function Home() {
-  const router = useRouter();
-  const [activePalette, setActivePalette] = useState<Palette>('blue');
   const [activeSection, setActiveSection] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Handle initial hash in URL
-    if (router.isReady) {
-      const hash = window.location.hash.slice(1);
-      if (hash) {
-        setActiveSection(hash);
-      }
-    }
-  }, [router.isReady]);
-
-  useEffect(() => {
-    // Handle hash changes
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1);
-      setActiveSection(hash || null);
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  const [activePalette, setActivePalette] = useState<Palette>('blue');
 
   const handleSectionClick = (section: string) => {
+    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
     setActiveSection(activeSection === section ? null : section);
   };
 
   const handleSectionToggle = (section: string) => {
-    const willOpen = activeSection !== section;
-    handleSectionClick(section);
-    if (willOpen) {
-      router.push(`#${section}`, undefined, { shallow: true });
-    }
+    setActiveSection(activeSection === section ? null : section);
   };
 
   return (
@@ -64,9 +38,9 @@ export default function Home() {
 
       <main className="relative z-10 pt-20 text-gray-200 scroll-smooth">
         <section id="about">
-          <ShadedBackground palette={activePalette}>
+          <GradientBackground palette={activePalette}>
             <About />
-          </ShadedBackground>
+          </GradientBackground>
         </section>
 
         <section id="code">
@@ -157,6 +131,6 @@ export default function Home() {
         </button>
 
       </footer>
-    </> 
+    </>
   );
 }
