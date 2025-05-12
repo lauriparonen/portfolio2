@@ -31,7 +31,7 @@ export default function Home() {
     <>
       <Head>
         <title>lauri paronen</title>
-        <meta name="description" content="Developer, writer, and sound tinkerer" />
+        <meta name="description" content="Developer, writer, and sound tinkerer" meta name="color-scheme" content="light" />
       </Head>
 
       <Header onSectionClick={handleSectionClick} />

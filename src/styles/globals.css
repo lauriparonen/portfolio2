@@ -12,11 +12,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* ruins the color scheme on some browsers
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+*/
+
+:root {
+  --background: #0a0a0a;   
+  --foreground: #ededed;  
+  color-scheme: only light;
+  forced-color-adjust: none;
 }
 
 body {
