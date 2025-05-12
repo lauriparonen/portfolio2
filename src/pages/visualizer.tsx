@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function VisualizerPage() {
-  const [selectedTrack, setSelectedTrack] = useState("/audio/epilysis.mp3");
+  const [selectedTrack, setSelectedTrack] = useState("/audio/grassblades.mp3");
   const [showInfo, setShowInfo] = useState(false);
   const [showTechDetails, setShowTechDetails] = useState(false);
 
@@ -39,7 +39,7 @@ export default function VisualizerPage() {
             <input
               id="audio-upload"
               type="file"
-              accept="audio/*"
+              accept=".mp3,.wav,.ogg"
               onChange={handleFileChange}
               className="hidden"
             />
@@ -72,7 +72,7 @@ export default function VisualizerPage() {
                    unpredictably, making each visualization organic and unique.
                 </p>
                 <p className="text-gray-300 mb-6">
-                  The default track is <i>Epilysis</i>, an ambient track of mine. 
+                  The default track is <i>Grass Blades</i>, a lofi track of mine. 
                   You can also upload your own audio file to visualize. 
                 </p>
                 <div>

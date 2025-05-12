@@ -114,8 +114,8 @@ export default function Home() {
         </div>
 
         <div className="relative z-10">
-          © {new Date().getFullYear()} lauri paronen <br />
-          (ノ ˘_˘)ノ　ζ|||ζ　ζ|||ζ　ζ|||ζ
+          © {new Date().getFullYear()} lauri paronen  {/* <br /> (ノ ˘_˘)ノ　ζ|||ζ　ζ|||ζ　ζ|||ζ */}
+          
         </div>
 
         <button

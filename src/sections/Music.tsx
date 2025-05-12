@@ -14,7 +14,7 @@ export default function Music() {
       <p className="text-gray-400 max-w-xl mb-8">
         I sometimes tinker with sound. Below you can find my music on SoundCloud and Spotify.
         The <i>visualizer</i> button takes you to a page where you can find a colorful gradient audio visualizer. 
-        It initially plays <i>Epilysis</i>, an ambient track of mine; but you can also visualize your own audio files	♪♪♪ ヽ(ˇ∀ˇ )ゞ
+        It initially plays a lofi beat of mine; but you can also visualize your own audio files	♪♪♪ ヽ(ˇ∀ˇ )ゞ
       </p>
 
       <div className="flex justify-center mb-8">
