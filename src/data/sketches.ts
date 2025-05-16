@@ -14,7 +14,6 @@ export const sketches: Sketch[] = [
     description: 'A p5.js sketch that visualizes recursion by drawing squares inside squares, creating an optical illusion as though the boundaries of the squares vanish into a spiral.',
     sketchUrl: 'https://editor.p5js.org/lauriparonen/full/czMhcbE9e',
     height: '400px',
-    width: '400px',
     isSquareVisualization: true
   },
   {
