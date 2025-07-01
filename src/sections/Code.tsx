@@ -3,7 +3,6 @@ import P5Sketch from '../components/P5Sketch';
 import GradientGallery from '../components/GradientGallery';
 import { sketches } from '../data/sketches';
 
-// Placeholder gradient images - replace with your actual filenames
 const gradientImages = [
   'gradient-1.png',
   'gradient-2.png', 
