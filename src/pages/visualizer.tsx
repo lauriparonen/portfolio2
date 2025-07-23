@@ -1,6 +1,5 @@
 "use client";
 
-import Visualizer3D from "@/components/Visualizer3D";
 import Visualizer2D from "@/components/Visualizer2D";
 import Link from "next/link";
 import { useState } from "react";
@@ -89,7 +88,7 @@ export default function VisualizerPage() {
                   <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showTechDetails ? 'max-h-[200px] opacity-100' : 'max-h-0 opacity-0'}`}>
                     <p className="text-gray-300 mb-6">
                       The visualizer uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" className="text-gray-400 hover:text-white transition-colors" target="_blank">Web Audio API</a> to analyze the audio and extract the frequency data.
-                      The frequency data is used to modulate the color parameters of <i><a href="https://github.com/paper-design" className="text-gray-400 hover:text-white transition-colors" target="_blank">paper design's</a></i> mesh gradient shader.
+                      The frequency data is used to modulate the color parameters of <i><a href="https://github.com/paper-design" className="text-gray-400 hover:text-white transition-colors" target="_blank">paper design&apos;s</a></i> mesh gradient shader.
                     </p>
                   </div>
                 </div>

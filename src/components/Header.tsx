@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 type Props = {
@@ -45,7 +44,7 @@ const Header = ({ onSectionClick }: Props) => {
           </div>
           <nav className="flex flex-wrap justify-center sm:justify-end gap-4 text-sm">
             <a href="#code" onClick={(e) => handleClick(e, 'code')} className="hover:text-white transition">code</a>
-            <a href="#writing" onClick={(e) => handleClick(e, 'writing')} className="hover:text-white transition">writing</a>
+            {/* <a href="#writing" onClick={(e) => handleClick(e, 'writing')} className="hover:text-white transition">writing</a> */}
             <a href="#nous" onClick={(e) => handleClick(e, 'nous')} className="hover:text-white transition">nous</a>
             <a href="#music" onClick={(e) => handleClick(e, 'music')} className="hover:text-white transition">music</a>
             <a href="#gallery" onClick={(e) => handleClick(e, 'gallery')} className="hover:text-white transition">gallery</a>

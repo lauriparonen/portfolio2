@@ -33,7 +33,7 @@ const Code = () => {
               </h4>
               <p className="text-gray-400">
                 Web UI for creating and exporting grainy color gradients as images or gifs. Inspired by <a href="https://www.cosmos.so/lauzi/gradients-colors" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:underline">this Cosmos collection</a>.
-                The page has a canvas which reacts to the cursor's position, creating a ripple effect which creates novelty and generativity to the gradients. 
+                The page has a canvas which reacts to the cursor&apos;s position, creating a ripple effect which creates novelty and generativity to the gradients. 
                 The color palette, ripple effect, and graininess are all dynamic and can be adjusted via a menu in the interface. The generated images make for 
                 interesting wallpapers and can be used in generative art projects as well as graphic design.
               </p>
