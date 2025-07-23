@@ -1,9 +1,8 @@
-// src/pages/index.tsx
 import { useState } from 'react';
 import Head from "next/head";
 import Header from "@/components/Header";
 import Code from "@/sections/Code";
-import Writing from "@/sections/Writing";
+//import Writing from "@/sections/Writing";
 import Nous from "@/sections/Nous";
 import Music from "@/sections/Music";
 import Gallery from "@/sections/Gallery";
@@ -54,6 +53,7 @@ export default function Home() {
           </CollapsibleSection>
         </section>
 
+{/*
         <section id="writing">
           <CollapsibleSection 
             title="writing" 
@@ -64,6 +64,7 @@ export default function Home() {
             <Writing />
           </CollapsibleSection>
         </section>
+*/}
 
         <section id="nous">
           <CollapsibleSection 
