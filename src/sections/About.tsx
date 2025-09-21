@@ -50,9 +50,12 @@ const About = () => {
           onClick={() => setIsOpen(!isOpen)}
           className="h-40 md:h-48 relative focus:outline-none mx-auto flex items-center justify-center"
           style={{
-            transform: `translateX(0) rotate(${scrollY * 0.2}deg)`,
-            opacity: Math.max(0.3, 1 - scrollY * 0.001),
-          }}
+            '--rotation': `${scrollY * 0.2}deg`,
+            '--opacity': Math.max(0.3, 1 - scrollY * 0.001),
+            transform: `translateX(0) rotate(var(--rotation))`,
+            opacity: 'var(--opacity)',
+            willChange: 'transform, opacity'
+          } as any}
           aria-label="Show logo meaning"
         >
           <Image

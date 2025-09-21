@@ -19,7 +19,7 @@ export default function GrainyShader({ children, className }: GrainyShaderProps)
       <GrainGradient 
         colors={['#5F85DF', '#280096', '#3C3B92']} 
         colorBack="#00000000" 
-        speed={0.28} 
+        speed={0.15} 
         scale={1.35} 
         rotation={0} 
         offsetX={0} 
@@ -37,7 +37,8 @@ export default function GrainyShader({ children, className }: GrainyShaderProps)
           left: 0,
           width: '100%',
           height: '100%',
-          zIndex: -1
+          zIndex: -1,
+          willChange: 'auto'
         }} 
       />
       {children}

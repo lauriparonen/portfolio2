@@ -37,9 +37,7 @@ export default function Home() {
 
       <main className="relative z-10 pt-20 text-gray-200 scroll-smooth">
         <section id="about">
-          <GradientBackground palette={activePalette}>
             <About />
-          </GradientBackground>
         </section>
 
         <section id="code">

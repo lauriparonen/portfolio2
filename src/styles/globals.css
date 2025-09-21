@@ -43,3 +43,12 @@ html {
 :root {
   color-scheme: light dark;
 }
+
+* {
+  transform-style: preserve-3d;
+}
+
+.gpu-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
