@@ -63,17 +63,11 @@ const GradientBackground = ({
 
       <style jsx>{`
         @keyframes gradient {
-          0% { transform: translateX(0%) translateY(0%); }
-          50% { transform: translateX(-25%) translateY(-25%); }
-          100% { transform: translateX(0%) translateY(0%); }
-        }
-        
-        .gradient-bg {
-          transform: scale(1.5);
-          will-change: transform;
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
       `}</style>
-
     </div>
   );
 };
