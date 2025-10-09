@@ -30,16 +30,14 @@ export default function Home() {
     <>
       <Head>
         <title>lauri paronen</title>
-        <meta name="description" content="Developer, writer, and sound tinkerer" />
+        <meta name="description" content="Curious individual" />
       </Head>
 
       <Header onSectionClick={handleSectionClick} />
 
       <main className="relative z-10 pt-20 text-gray-200 scroll-smooth">
         <section id="about">
-          <GradientBackground palette={activePalette}>
             <About />
-          </GradientBackground>
         </section>
 
         <section id="code">

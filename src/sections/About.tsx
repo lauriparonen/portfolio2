@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
-import GradientBackground from "@/components/GradientBackground";
+import GrainyShader from "@/components/GrainyShader";
 import Image from "next/image";
 
 const About = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
+    let ticking = false
+
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+      }
+      ticking = true;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -15,7 +23,7 @@ const About = () => {
   }, []);
 
   return (
-    <GradientBackground className="min-h-screen relative">
+    <GrainyShader className="min-h-screen relative">
       <div className="px-6 py-20">
         <h2 className="text-3xl font-serif mb-4">about</h2>
         <p className="text-gray-400 max-w-xl mb-8">
@@ -31,7 +39,7 @@ const About = () => {
           
           Here you can find my coding projects and other creative work.
           <br />
-          Scroll below to explore ( ˙▿˙ )
+          Scroll below to explore (˙▿˙ )
           <br />
         </p>
       </div>
@@ -41,9 +49,12 @@ const About = () => {
           onClick={() => setIsOpen(!isOpen)}
           className="h-40 md:h-48 relative focus:outline-none mx-auto flex items-center justify-center"
           style={{
-            transform: `translateX(0) rotate(${scrollY * 0.2}deg)`,
-            opacity: Math.max(0.3, 1 - scrollY * 0.001),
-          }}
+            '--rotation': `${scrollY * 0.2}deg`,
+            '--opacity': Math.max(0.3, 1 - scrollY * 0.001),
+            transform: `translateX(0) rotate(var(--rotation))`,
+            opacity: 'var(--opacity)',
+            willChange: 'transform, opacity'
+          } as any}
           aria-label="Show logo meaning"
         >
           <Image
@@ -82,7 +93,7 @@ const About = () => {
           </p>
         </div>
       </div>
-    </GradientBackground>
+    </GrainyShader>
   );
 };
 
