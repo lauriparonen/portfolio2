@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import GradientBackground from "@/components/GradientBackground";
 import GrainyShader from "@/components/GrainyShader";
 import Image from "next/image";
 

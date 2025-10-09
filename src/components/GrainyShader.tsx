@@ -1,47 +1,44 @@
 "use client"
 
-/** @paper-design/shaders-react@0.0.54 */
-import { GrainGradient } from '@paper-design/shaders-react';
-
-/**
- * Code exported from Paper
- * https://app.paper.design/file/01K5K7ETP2ADSCWM737XE092S3?node=01K5K7HVK0HASV4FYDMFF44B39
- * on Sep 20, 2025 at 1:15 PM.
- */
 interface GrainyShaderProps {
   children?: React.ReactNode;
   className?: string;
 }
 
+/** @paper-design/shaders-react@0.0.55 */
+import { GrainGradient } from '@paper-design/shaders-react';
+
+/**
+ * Code exported from Paper
+ * https://app.paper.design/file/01K6J72GY8WCGPTY7JA54XKV0M?node=01K6QNWF4NK3CTNWDDHFE95AF5
+ * on Oct 9, 2025 at 12:29 PM.
+ */
 export default function GrainyShader({ children, className }: GrainyShaderProps) {
   return (
     <div className={className} style={{ position: 'relative' }}>
       <GrainGradient 
-        colors={['#5F85DF', '#280096', '#3C3B92']} 
-        colorBack="#00000000" 
-        speed={0.15} 
-        scale={1.35} 
-        rotation={0} 
-        offsetX={0} 
-        offsetY={0.26} 
-        softness={0.7} 
-        intensity={0.17} 
-        noise={0.19} 
-        shape="wave" 
-        frame={87449.25000002515} 
-        style={{ 
-          backgroundColor: '#000A0F', 
-          borderRadius: '0px', 
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: -1,
-          willChange: 'auto'
-        }} 
-      />
-      {children}
+          colors={['#9F8EEC', '#6696EA', '#3F7CFF']} 
+          colorBack="#00000000" 
+          speed={0.17} 
+          scale={0.57} 
+          rotation={-143} 
+          offsetX={0.2} 
+          offsetY={-0.27} 
+          softness={0.67} 
+          intensity={0.16} 
+          noise={0.21} 
+          shape="wave" 
+          frame={388314.307000006} 
+          style={
+            { position: 'absolute',
+              top: -80,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: -1,
+              willChange: 'auto'
+            }} />
+            {children}
     </div>
-  );
+  )
 }

@@ -33,7 +33,7 @@ const CollapsibleSection = ({
   }, [children]);
 
   return (
-    <section className="border-b border-white/0 backdrop-blur-sm bg-black/5 hover:bg-black/10">
+    <section className="border-b border-white/0 backdrop-blur-sm bg-black/2 hover:bg-black/10">
       <button
         onClick={onToggle}
         className="relative z-20 flex w-full items-center justify-between py-4 px-4 cursor-pointer hover:bg-black/5 transition-colors"
