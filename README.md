@@ -1,40 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# lauri's personal portfolio
+[visit the site](https://www.lauriparonen.com/)  
+---
+## about
+This is my personal portfolio website. 
+Intended to be a living art ledger; designed and coded by yours truly
 
-## Getting Started
+### sections
+#### about
+introduction / landing view
+- on-scroll rotating enso-laurel 
+- wavy background animation made with [paper-design](https://paper.design/)
+<img width="1661" height="925" alt="image" src="https://github.com/user-attachments/assets/8797145f-7960-4d16-8d22-57e5e0dcf13a" />
 
-First, run the development server:
+#### code
+links, embeds to my coding projects
+<img width="850" height="604" alt="image" src="https://github.com/user-attachments/assets/ca3173bd-ee1d-4578-83c0-f4140ee52766" />
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### nous
+[cosmos](https://www.cosmos.so/lauzi) (the cooler pinterest) embed
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### music
+links to my music + an audio-reactive mesh gradient visualizer also made with [paper-design](https://paper.design/)
+<img width="1000" height="812" alt="image" src="https://github.com/user-attachments/assets/7020cbaa-f88d-4f41-a4b1-b56cf848d5bb" />
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+#### gallery
+carousel with archive DALL-E 2 generations, from when AI imagegen was still fun
+<img width="753" height="780" alt="image" src="https://github.com/user-attachments/assets/a8574d2a-5f23-4076-8a2b-816e1da083a3" />
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+#### contact
+email + social links
