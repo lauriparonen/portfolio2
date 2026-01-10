@@ -37,13 +37,13 @@ export default function Home() {
 
       <main className="relative z-10 pt-20 text-gray-200 scroll-smooth">
         <section id="about">
-            <About />
+          <About />
         </section>
 
         <section id="code">
-          <CollapsibleSection 
-            title="code" 
-            palette="maroon" 
+          <CollapsibleSection
+            title="code"
+            palette="maroon"
             isOpen={activeSection === 'code'}
             onToggle={() => handleSectionToggle('code')}
           >
@@ -51,7 +51,7 @@ export default function Home() {
           </CollapsibleSection>
         </section>
 
-{/*
+        {/*
         <section id="writing">
           <CollapsibleSection 
             title="writing" 
@@ -64,6 +64,7 @@ export default function Home() {
         </section>
 */}
 
+        {/* // have to remove this because cosmos nerfed the iframe
         <section id="nous">
           <CollapsibleSection 
             title="nous" 
@@ -74,10 +75,11 @@ export default function Home() {
             <Nous />
           </CollapsibleSection>
         </section>
+*/}
 
         <section id="music">
-          <CollapsibleSection 
-            title="music" 
+          <CollapsibleSection
+            title="music"
             palette="blue"
             isOpen={activeSection === 'music'}
             onToggle={() => handleSectionToggle('music')}
@@ -87,8 +89,8 @@ export default function Home() {
         </section>
 
         <section id="gallery">
-          <CollapsibleSection 
-            title="gallery" 
+          <CollapsibleSection
+            title="gallery"
             palette="blue"
             isOpen={activeSection === 'gallery'}
             onToggle={() => handleSectionToggle('gallery')}
@@ -98,8 +100,8 @@ export default function Home() {
         </section>
 
         <section id="contact">
-          <CollapsibleSection 
-            title="contact" 
+          <CollapsibleSection
+            title="contact"
             palette="blue"
             isOpen={activeSection === 'contact'}
             onToggle={() => handleSectionToggle('contact')}
@@ -114,7 +116,7 @@ export default function Home() {
 
         <div className="relative z-10">
           © {new Date().getFullYear()} lauri paronen  {/* <br /> (ノ ˘_˘)ノ　ζ|||ζ　ζ|||ζ　ζ|||ζ */}
-          
+
         </div>
 
         <button
